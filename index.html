@@ -1,0 +1,114 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Data Diri</title>
+</head>
+
+<body>
+    <h1 class="form">Form Data Diri</h1>
+    <form id="form">
+
+        <p>Nama</p>
+        <input type="text" name="nama" id="nama">
+
+        <p>Alamat</p>
+        <input type="text" id="alamat">
+
+        <p>No HP</p>
+        <input type="text" id="no-hp">
+
+        <p>Email</p>
+        <input type="email" id="email">
+
+        <p>Keahlian</p>
+        <input type="checkbox" id="keahlian1" name="keahlian" value="fullstack">
+        <label for="keahlian1">Fullstack</label><br>
+        <input type="checkbox" id="keahlian2" name="keahlian" value="mobile-dev">
+        <label for="keahlian2">Mobile Developer</label><br>
+        <input type="checkbox" id="keahlian3" name="keahlian" value="qa">
+        <label for="keahlian3">QA</label><br>
+        <input type="checkbox" id="keahlian4" name="keahlian" value="fe">
+        <label for="keahlian4">FrontEnd</label><br>
+        <input type="checkbox" id="keahlian5" name="keahlian" value="be">
+        <label for="keahlian5">BackEnd</label><br>
+
+    </form>
+    <input type="button" value="Submit" onclick="submit()">
+
+
+    <h1>Tabel Data Diri</h1>
+    <table id="tabel">
+        <tr>
+            <td>Nama</td>
+            <td>Alamat</td>
+            <td>No HP</td>
+            <td>Email</td>
+            <td>Kategori</td>
+        </tr>
+    </table>
+
+
+</body>
+
+<script>
+    function submit() {
+        let nama = document.getElementById('nama').value;
+        let alamat = document.getElementById('alamat').value;
+        let noHp = document.getElementById('no-hp').value;
+        let email = document.getElementById('email').value;
+
+
+        let checkbox = document.querySelectorAll('input[type="checkbox"]:checked');
+        var arr = [];
+
+
+
+        if (nama == "") {
+            return alert('Form Nama harus diisi!');
+        } else if (alamat == "") {
+            return alert('Form Alamat diisi!');
+        } else if (noHp == "") {
+            return alert('Form No HP harus diisi!');
+        } else if (!noHp.match(/\+6+[2]+[0-9]{9,11}/g)) {
+            return alert('Form no Hp tidak sesuai!');
+        } else if (email == "") {
+            return alert('Form email harus diisi!');
+        } else if (!email.match(/^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+            return alert('Email salah!');
+        } else {
+
+            for (let i = 0; i < checkbox.length; i++) {
+                if (checkbox[i].checked) {
+                    arr.push(checkbox[i].value);
+                }
+            }
+            if (checkbox.length == 0) {
+                alert('Cehckbox Wajib diisi!');
+                return false;
+            }
+
+            let table = document.getElementById('tabel');
+            let row = table.insertRow();
+
+            let cell1 = row.insertCell();
+            let cell2 = row.insertCell();
+            let cell3 = row.insertCell();
+            let cell4 = row.insertCell();
+            let cell5 = row.insertCell();
+
+            cell1.innerHTML = nama;
+            cell2.innerHTML = alamat;
+            cell3.innerHTML = noHp;
+            cell4.innerHTML = email;
+            cell5.innerHTML = arr;
+        }
+        document.getElementById('form').reset();
+
+    }
+</script>
+
+</html>
